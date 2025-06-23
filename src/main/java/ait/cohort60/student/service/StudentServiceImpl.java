@@ -7,17 +7,20 @@ import ait.cohort60.student.dto.StudentDto;
 import ait.cohort60.student.dto.StudentUpdateDto;
 import ait.cohort60.student.dto.exceptions.NotFoundException;
 import ait.cohort60.student.model.Student;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Component
+@Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
-    @Autowired
-    private StudentRepository studentRepository;
+//    @Autowired
+    private final StudentRepository studentRepository;
 
 
     @Override

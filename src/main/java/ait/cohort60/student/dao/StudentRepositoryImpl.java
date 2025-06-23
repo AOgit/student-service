@@ -3,11 +3,12 @@ package ait.cohort60.student.dao;
 import ait.cohort60.student.model.Student;
 import org.springframework.boot.env.ConfigTreePropertySource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
+@Repository
 public class StudentRepositoryImpl implements StudentRepository {
     private Map<Long, Student> students = new ConcurrentHashMap<>();
 

@@ -6,6 +6,7 @@ import ait.cohort60.student.dto.StudentDto;
 import ait.cohort60.student.dto.StudentUpdateDto;
 import ait.cohort60.student.model.Student;
 import ait.cohort60.student.service.StudentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,12 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
+@RequiredArgsConstructor
+// все final поля будут добавлены в конструктор и их bean будет добавлен в класс
+// Это просто бест практис вместо @Autowired
 public class StudentController {
-    @Autowired
-    private StudentService studentService;
+//    @Autowired
+    private final StudentService studentService;
 
     @PostMapping("/student")
     public Boolean addStudent(@RequestBody StudentCredentialsDto studentCredentialsDto) {
