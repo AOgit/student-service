@@ -69,13 +69,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDto> findStudentsByName(String name) {
-        List<Student> students = studentRepository.findAll();
-        return students.stream()
-                .filter(student -> name.equalsIgnoreCase(student.getName()))
-                .map(student -> new StudentDto(student.getId(), student.getName(), student.getScores()))
+//        List<Student> students = studentRepository.findAll();
+//        return students.stream()
+//                .filter(student -> name.equalsIgnoreCase(student.getName()))
+//                .map(student -> new StudentDto(student.getId(), student.getName(), student.getScores()))
+//                .toList();
+        return studentRepository.findByNameIgnoreCase(name)
+                .map(s -> new StudentDto(s.getId(), s.getName(), s.getScores()))
                 .toList();
     }
 
+    // TODO
     @Override
     public Long countStudentsByNames(Set<String> names) {
         List<Student> students = studentRepository.findAll();
@@ -86,14 +90,20 @@ public class StudentServiceImpl implements StudentService {
                 .count();
     }
 
+    // TODO НЕЛЬЗЯ РЕАЛИЗОВАТЬ ТОЛЬКО ЧЕРЕЗ НАЗВАНИЕ
+    // НАПИСАТЬ ЗАПРОС НА ЯЗЫКЕ МОНГОДБ И ВЫПОЛНИТЬ
     @Override
     public List<StudentDto> findStudentsByExamNameMinScore(String examName, Integer minScore) {
-        List<Student> students = studentRepository.findAll();
-        return students.stream()
-                .filter(student -> {
-                    Integer score = student.getScores().get(examName);
-                    return score != null && score >= minScore;
-                })
+//        List<Student> students = studentRepository.findAll();
+//        return students.stream()
+//                .filter(student -> {
+//                    Integer score = student.getScores().get(examName);
+//                    return score != null && score >= minScore;
+//                })
+//                .map(student -> new StudentDto(student.getId(), student.getName(), student.getScores()))
+//                .toList();
+
+        return studentRepository.findByExamAndScoresGreaterThan(examName, minScore)
                 .map(student -> new StudentDto(student.getId(), student.getName(), student.getScores()))
                 .toList();
     }
